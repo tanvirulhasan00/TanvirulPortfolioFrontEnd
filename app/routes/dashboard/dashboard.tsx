@@ -4,7 +4,7 @@ import type { Route } from "./+types/dashboard";
 import DashboardComponent from "~/components/DashboardComponent";
 import { authCookie, userIdCookie } from "~/components/cookies/cookies";
 
-export const loader = async ({ request }: Route.LoaderArgs) => {
+export const clienLoader = async ({ request }: Route.ClientLoaderArgs) => {
   const cookieHeader = request.headers.get("Cookie");
   const token = (await authCookie.parse(cookieHeader)) || null;
   const userId = (await userIdCookie.parse(cookieHeader)) || null;
@@ -13,12 +13,12 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
   }
   return { userId };
 };
-export const action = async ({ request }: Route.ActionArgs) => {
+export const clientAction = async ({ request }: Route.ClientActionArgs) => {
   console.log("click");
 };
 
 const Dashboard = () => {
-  const { userId } = useLoaderData<typeof loader>();
+  const { userId } = useLoaderData<typeof clienLoader>();
   return (
     <DashboardComponent userId={userId}>
       {/* <Form method="post"> */}

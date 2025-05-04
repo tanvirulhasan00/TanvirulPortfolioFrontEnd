@@ -28,7 +28,7 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export const loader = async ({ request }: Route.LoaderArgs) => {
+export const clienLoader = async ({ request }: Route.ClientLoaderArgs) => {
   const cookieHeader = request.headers.get("Cookie");
   const token = (await authCookie.parse(cookieHeader)) || null;
 
@@ -38,7 +38,7 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
   return { token: token };
 };
 
-export const action = async ({ request }: Route.ActionArgs) => {
+export const clientAction = async ({ request }: Route.ClientActionArgs) => {
   const formData = await request.formData();
   const username = formData.get("userName") as string;
   const password = formData.get("password") as string;

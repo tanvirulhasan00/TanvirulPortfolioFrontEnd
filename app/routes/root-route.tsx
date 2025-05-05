@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { redirect, useLoaderData, useNavigate } from "react-router";
 import type { Route } from "./+types/root-route";
 
-export const clienLoader = async ({ request }: Route.ClientLoaderArgs) => {
-  const token = "null";
+export const clientLoader = async ({ request }: Route.ClientLoaderArgs) => {
+  const token = "hh";
   if (!token) {
     return redirect("/auth/login");
   }
@@ -12,7 +12,7 @@ export const clienLoader = async ({ request }: Route.ClientLoaderArgs) => {
 };
 
 const RootRoute = () => {
-  const { token } = useLoaderData<typeof clienLoader>();
+  const { token } = useLoaderData<typeof clientLoader>();
   const navigate = useNavigate();
   useEffect(() => {
     token ? navigate("/dashboard") : navigate("/auth/login");

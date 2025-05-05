@@ -4,21 +4,22 @@ import type { Route } from "./+types/dashboard";
 import DashboardComponent from "~/components/DashboardComponent";
 import { authCookie, userIdCookie } from "~/components/cookies/cookies";
 
-export const clienLoader = async ({ request }: Route.ClientLoaderArgs) => {
+export const clientLoader = async ({ request }: Route.ClientLoaderArgs) => {
   const cookieHeader = request.headers.get("Cookie");
   const token = (await authCookie.parse(cookieHeader)) || null;
   const userId = (await userIdCookie.parse(cookieHeader)) || null;
-  if (!token) {
-    return redirect("/auth/login");
-  }
+  // if (!token) {
+  //   return redirect("/auth/login");
+  // }
   return { userId };
 };
 export const clientAction = async ({ request }: Route.ClientActionArgs) => {
   console.log("click");
+  return "";
 };
 
 const Dashboard = () => {
-  const { userId } = useLoaderData<typeof clienLoader>();
+  const { userId } = useLoaderData<typeof clientLoader>();
   return (
     <DashboardComponent userId={userId}>
       {/* <Form method="post"> */}

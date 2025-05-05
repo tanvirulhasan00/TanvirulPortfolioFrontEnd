@@ -28,14 +28,15 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export const clienLoader = async ({ request }: Route.ClientLoaderArgs) => {
+export const clientLoader = async ({ request }: Route.ClientLoaderArgs) => {
   const cookieHeader = request.headers.get("Cookie");
   const token = (await authCookie.parse(cookieHeader)) || null;
 
-  if (token) {
-    return redirect("/dashboard");
-  }
-  return { token: token };
+  // if (token) {
+  //   return redirect("/dashboard");
+  // }
+  // return { token: token };
+  return "";
 };
 
 export const clientAction = async ({ request }: Route.ClientActionArgs) => {
